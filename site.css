@@ -61,6 +61,14 @@ a { color: #534AB7; }
 
 .site-nav { margin-bottom: 16px; }
 
+.site-nav--bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .site-nav a {
   font-size: 14px;
   font-weight: 600;
@@ -68,6 +76,76 @@ a { color: #534AB7; }
 }
 
 .site-nav a:hover { text-decoration: underline; }
+
+.site-nav__back {
+  color: #534AB7;
+}
+
+.site-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #534AB7;
+  background: #EEEDFE;
+  color: #534AB7 !important;
+  font-size: 13px !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+.site-pdf-btn:hover {
+  background: #534AB7;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.site-pdf-btn--hero {
+  margin-top: 14px;
+  font-size: 14px !important;
+  padding: 10px 18px;
+}
+
+.site-pdf-btn--card {
+  font-size: 12px !important;
+  padding: 6px 12px;
+}
+
+.site-session-card-wrap {
+  border: 1px solid var(--color-border-tertiary);
+  border-left-width: 4px;
+  border-radius: var(--radius-lg);
+  background: var(--color-background-primary);
+  overflow: hidden;
+}
+
+.site-session-card__main {
+  display: block;
+  padding: 14px 18px 10px;
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
+
+.site-session-card__main:hover {
+  background: #fafaf8;
+}
+
+.site-session-card-wrap .site-session-card {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.site-session-card__pdf {
+  padding: 0 18px 12px;
+  border-top: 1px solid var(--color-border-tertiary);
+  background: #fafaf8;
+}
+
+.pv-hero__pdf {
+  margin-top: 12px;
+}
 
 .site-phase {
   margin-bottom: 28px;
