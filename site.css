@@ -459,6 +459,20 @@ details.pv-card > summary::-webkit-details-marker { display: none; }
   border-radius: var(--radius-md);
 }
 
+.markdown-video-link {
+  text-align: center;
+  margin: -8px auto 20px;
+  max-width: 720px;
+  padding: 0 24px;
+  font-size: 14px;
+}
+
+.markdown-video-link a {
+  color: #D85A30 !important;
+  font-weight: 600;
+  text-decoration: underline !important;
+}
+
 .pv-markdown iframe {
   display: block;
   width: calc(100% - 48px);
