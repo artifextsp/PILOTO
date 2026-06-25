@@ -59,6 +59,17 @@ a { color: #534AB7; }
   margin-top: 6px;
 }
 
+.site-header__pdf-hint {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: #EEEDFE;
+  border: 1px solid #534AB7;
+  color: #3d3785;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
 .site-nav { margin-bottom: 16px; }
 
 .site-nav--bar {
@@ -81,35 +92,34 @@ a { color: #534AB7; }
   color: #534AB7;
 }
 
-.site-pdf-btn {
+.site-pdf-icon-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
   border-radius: 8px;
-  border: 1px solid #534AB7;
+  border: 1px solid #d8d6f0;
+  background: #fff;
+  color: #534AB7;
+  text-decoration: none !important;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.site-pdf-icon-btn:hover {
   background: #EEEDFE;
-  color: #534AB7 !important;
-  font-size: 13px !important;
-  text-decoration: none !important;
-  white-space: nowrap;
+  border-color: #534AB7;
+  color: #3d3785;
 }
 
-.site-pdf-btn:hover {
-  background: #534AB7;
-  color: #fff !important;
-  text-decoration: none !important;
+.site-pdf-icon-btn--nav {
+  width: 36px;
+  height: 36px;
 }
 
-.site-pdf-btn--hero {
-  margin-top: 14px;
-  font-size: 14px !important;
-  padding: 10px 18px;
-}
-
-.site-pdf-btn--card {
-  font-size: 12px !important;
-  padding: 6px 12px;
+.site-pdf-icon {
+  display: block;
 }
 
 .site-session-card-wrap {
@@ -121,14 +131,38 @@ a { color: #534AB7; }
 }
 
 .site-session-card__main {
-  display: block;
-  padding: 14px 18px 10px;
-  text-decoration: none;
-  color: var(--color-text-primary);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px 16px 22px;
 }
 
-.site-session-card__main:hover {
-  background: #fafaf8;
+.site-session-card__link {
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: var(--color-text-primary);
+  padding-right: 8px;
+}
+
+.site-session-card__link:hover .site-session-card__title {
+  color: #534AB7;
+}
+
+.site-session-card__title {
+  display: block;
+  font-size: 15px;
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+
+.site-session-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  padding-top: 2px;
 }
 
 .site-session-card-wrap .site-session-card {
@@ -137,14 +171,20 @@ a { color: #534AB7; }
   padding: 0;
 }
 
-.site-session-card__pdf {
-  padding: 0 18px 12px;
-  border-top: 1px solid var(--color-border-tertiary);
-  background: #fafaf8;
-}
-
-.pv-hero__pdf {
-  margin-top: 12px;
+.site-header__pdf-hint-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid #d8d6f0;
+  background: #fff;
+  color: #534AB7;
+  font-size: 12px;
+  font-weight: 700;
+  vertical-align: middle;
+  margin: 0 2px;
 }
 
 .site-phase {
@@ -181,7 +221,7 @@ a { color: #534AB7; }
 
 .site-session-card {
   display: block;
-  padding: 14px 18px;
+  padding: 16px 20px 16px 22px;
   background: var(--color-background-primary);
   border: 1px solid var(--color-border-tertiary);
   border-left-width: 4px;
