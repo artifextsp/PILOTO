@@ -78,7 +78,7 @@ a { color: #534AB7; }
   width: auto;
   max-width: 148px;
   object-fit: contain;
-  border-radius: 6px;
+  background: transparent;
 }
 
 .site-header__logo--bogota {
