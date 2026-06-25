@@ -41,22 +41,128 @@ a { color: #534AB7; }
 }
 
 .site-header {
-  text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   padding-bottom: 24px;
   border-bottom: 1px solid var(--color-border-tertiary);
+}
+
+.site-header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.site-header__titles {
+  flex: 1;
+  min-width: 240px;
+  text-align: left;
+}
+
+.site-header__logos {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.site-header__logo {
+  display: block;
+  object-fit: contain;
+}
+
+.site-header__logo--uniminuto {
+  height: 52px;
+  max-width: 120px;
+  padding: 6px 10px;
+  background: #111;
+  border-radius: var(--radius-md);
+}
+
+.site-header__logo--bogota {
+  height: 56px;
+  max-width: 220px;
 }
 
 .site-header__brand {
   font-size: 28px;
   font-weight: 700;
   color: #534AB7;
+  line-height: 1.2;
 }
 
 .site-header__sub {
   font-size: 14px;
   color: var(--color-text-secondary);
   margin-top: 6px;
+}
+
+.site-conventions {
+  margin-bottom: 28px;
+  padding: 18px 20px;
+  background: var(--color-background-primary);
+  border: 1px solid var(--color-border-tertiary);
+  border-radius: var(--radius-lg);
+}
+
+.site-conventions__title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-text-secondary);
+  margin-bottom: 14px;
+}
+
+.site-conventions__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.site-convention-card {
+  padding: 14px;
+  border: 1px solid var(--color-border-tertiary);
+  border-radius: var(--radius-md);
+  background: #fafaf8;
+  min-height: 100%;
+}
+
+.site-convention-card__pill {
+  margin-bottom: 10px;
+}
+
+.site-convention-card__desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.site-conventions__footer {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border-tertiary);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .site-conventions__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-header__bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-header__logos {
+    justify-content: flex-start;
+    width: 100%;
+  }
 }
 
 .site-header__pdf-hint {
@@ -96,8 +202,8 @@ a { color: #534AB7; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
   border: 1px solid #d8d6f0;
   background: #fff;
@@ -111,15 +217,17 @@ a { color: #534AB7; }
   background: #EEEDFE;
   border-color: #534AB7;
   color: #3d3785;
+  text-decoration: none !important;
 }
 
 .site-pdf-icon-btn--nav {
-  width: 36px;
-  height: 36px;
+  /* Misma medida en índice y página de clase */
 }
 
 .site-pdf-icon {
   display: block;
+  width: 18px;
+  height: 18px;
 }
 
 .site-session-card-wrap {
@@ -132,10 +240,10 @@ a { color: #534AB7; }
 
 .site-session-card__main {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 16px 20px 16px 22px;
+  gap: 14px;
+  padding: 16px 18px 16px 22px;
 }
 
 .site-session-card__link {
@@ -143,26 +251,27 @@ a { color: #534AB7; }
   min-width: 0;
   text-decoration: none;
   color: var(--color-text-primary);
-  padding-right: 8px;
 }
 
 .site-session-card__link:hover .site-session-card__title {
   color: #534AB7;
 }
 
-.site-session-card__title {
-  display: block;
-  font-size: 15px;
-  line-height: 1.35;
+.site-session-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
   margin-bottom: 4px;
 }
 
-.site-session-card__actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-  padding-top: 2px;
+.site-session-card__title {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  line-height: 1.35;
 }
 
 .site-session-card-wrap .site-session-card {
