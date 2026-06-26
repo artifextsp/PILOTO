@@ -609,6 +609,28 @@ details.pv-card > summary::-webkit-details-marker { display: none; }
   display: block;
 }
 
+.markdown-image-error {
+  margin: 16px 0;
+  padding: 14px 16px;
+  border: 1px dashed var(--color-border-secondary);
+  border-radius: var(--radius-md);
+  background: var(--color-background-tertiary);
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.markdown-image-error__hint {
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.markdown-image-error a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #534AB7;
+}
+
 .markdown-embed {
   width: 100%;
   max-width: 720px;
