@@ -626,6 +626,9 @@ details.pv-card > summary::-webkit-details-marker { display: none; }
   box-shadow: 0 2px 14px rgba(17, 24, 39, 0.06);
   overflow: hidden;
   box-sizing: border-box;
+  display: block;
+  width: 100%;
+  cursor: zoom-in;
 }
 
 .markdown-image-card__img {
@@ -668,6 +671,43 @@ details.pv-card > summary::-webkit-details-marker { display: none; }
   display: inline-block;
   margin-top: 10px;
   color: #534AB7;
+}
+
+.markdown-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(4px);
+}
+
+.markdown-lightbox__img {
+  max-width: min(96vw, 1200px);
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  background: #fff;
+}
+
+.markdown-lightbox__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .markdown-embed {
