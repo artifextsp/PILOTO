@@ -604,17 +604,56 @@ details.pv-card > summary::-webkit-details-marker { display: none; }
 
 .pv-markdown img {
   max-width: 100%;
-  border-radius: var(--radius-md);
-  margin: 12px auto;
+}
+
+.markdown-spacer {
   display: block;
+  height: 18px;
+}
+
+.markdown-image-card {
+  margin: 28px auto;
+  max-width: min(100%, 720px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.markdown-image-card__frame {
+  border: 1px solid var(--color-border-tertiary);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  background: #fff;
+  box-shadow: 0 2px 14px rgba(17, 24, 39, 0.06);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.markdown-image-card__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin: 0;
+  border-radius: calc(var(--radius-md) - 4px);
+}
+
+.markdown-image-card__caption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  text-align: center;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.markdown-image-card--error .markdown-image-card__frame {
+  padding: 0;
+  border-style: dashed;
 }
 
 .markdown-image-error {
-  margin: 16px 0;
+  margin: 0;
   padding: 14px 16px;
-  border: 1px dashed var(--color-border-secondary);
-  border-radius: var(--radius-md);
-  background: var(--color-background-tertiary);
   color: var(--color-text-secondary);
   font-size: 14px;
   line-height: 1.5;
