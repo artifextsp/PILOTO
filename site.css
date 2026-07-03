@@ -675,12 +675,6 @@ details.pv-card > summary::-webkit-details-marker { display: none; }
   max-width: 100%;
   margin: 0;
   border-radius: calc(var(--radius-md) - 4px);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.markdown-image-card__img--loaded {
-  opacity: 1;
 }
 
 .markdown-image-card__caption {

@@ -28,6 +28,21 @@ function tryNextImageSource(img) {
   return true;
 }
 
+function markImageLoadedIfReady(img) {
+  if (!img.complete) return false;
+
+  if (img.naturalWidth > 0) {
+    img.classList.add("markdown-image-card__img--loaded");
+    return true;
+  }
+
+  if (tryNextImageSource(img)) return true;
+
+  const frame = img.closest(".markdown-image-card__frame");
+  if (frame) showImageError(frame, img);
+  return true;
+}
+
 function bindImageFallback(img) {
   if (img.dataset.fallbackBound === "true") return;
   img.dataset.fallbackBound = "true";
@@ -51,6 +66,8 @@ function bindImageFallback(img) {
       img.classList.add("markdown-image-card__img--loaded");
     }
   });
+
+  markImageLoadedIfReady(img);
 }
 
 function openLightbox(img) {
@@ -112,6 +129,15 @@ function initImageCards(root = document) {
   root.querySelectorAll(".markdown-image-card__img").forEach(bindImageFallback);
 }
 
+function initAccordionImages() {
+  document.querySelectorAll("details.pv-card").forEach((details) => {
+    details.addEventListener("toggle", () => {
+      if (details.open) initImageCards(details);
+    });
+  });
+}
+
 document.addEventListener("click", handleImageZoom);
 document.addEventListener("keydown", handleImageZoomKey);
 initImageCards();
+initAccordionImages();
