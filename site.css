@@ -76,14 +76,19 @@ a { color: #534AB7; }
 .site-header__logo--uniminuto {
   height: 58px;
   width: auto;
-  max-width: 148px;
+  max-width: 160px;
   object-fit: contain;
   background: transparent;
 }
 
 .site-header__logo--bogota {
+  height: 52px;
+  max-width: 180px;
+}
+
+.site-header__logo--stem {
   height: 56px;
-  max-width: 200px;
+  max-width: 120px;
 }
 
 .site-header__brand {
