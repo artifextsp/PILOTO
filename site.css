@@ -605,6 +605,19 @@ details.pv-card > summary::-webkit-details-marker { display: none; }
   margin-bottom: 12px;
 }
 
+.pv-markdown .markdown-styled-block {
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.pv-markdown .markdown-styled-block ol,
+.pv-markdown .markdown-styled-block ul,
+.pv-markdown .markdown-styled-block p,
+.pv-markdown .markdown-styled-block li {
+  color: inherit;
+  font-size: inherit;
+}
+
 .pv-markdown a { color: #534AB7; text-decoration: underline; }
 
 .pv-markdown img {
