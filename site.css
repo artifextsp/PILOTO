@@ -606,6 +606,25 @@ details.pv-card > summary::-webkit-details-marker { display: none; }
   max-width: 100%;
 }
 
+.pv-markdown .markdown-table-wrap {
+  margin: 16px 0 20px;
+  overflow-x: auto;
+}
+
+.pv-markdown .markdown-editor-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.pv-markdown .markdown-editor-table td,
+.pv-markdown .markdown-editor-table th {
+  border: 1px solid #d1d5db;
+  padding: 8px;
+  vertical-align: top;
+  word-break: break-word;
+}
+
 .markdown-spacer {
   display: block;
   height: 18px;
