@@ -71,6 +71,7 @@ a { color: #534AB7; }
 .site-header__logo {
   display: block;
   object-fit: contain;
+  background: transparent;
 }
 
 .site-header__logo--uniminuto {
@@ -78,7 +79,6 @@ a { color: #534AB7; }
   width: auto;
   max-width: 160px;
   object-fit: contain;
-  background: transparent;
 }
 
 .site-header__logo--bogota {
