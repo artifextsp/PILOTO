@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asistencia · Proyecto SPEED</title>
+  <link rel="stylesheet" href="site.css" />
+  <style>
+    .att-public { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
+    .att-public__header { margin-bottom: 24px; }
+    .att-public__header h1 { font-size: 1.75rem; margin: 0 0 8px; }
+    .att-public__header p { color: #64748b; margin: 0; line-height: 1.5; }
+    .att-public__filters { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+    .att-public__filters select { min-width: 280px; padding: 10px 12px; border-radius: 8px; border: 1px solid #d0d7de; }
+    .att-public__roll { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+    .att-public__roll h2 { margin: 0 0 4px; font-size: 1.1rem; }
+    .att-public__roll-meta { color: #64748b; font-size: 0.9rem; margin-bottom: 12px; }
+    .att-public__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+    .att-public__cell { border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px; text-align: center; background: #fafafa; }
+    .att-public__code { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.08em; font-family: ui-monospace, monospace; }
+    .att-public__status { display: inline-block; margin-top: 6px; font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; border: 1px solid; }
+    .att-public__status--presente { color: #1D9E75; background: #EAF7F1; border-color: #1D9E75; }
+    .att-public__status--ausente { color: #DC2626; background: #FEE2E2; border-color: #DC2626; }
+    .att-public__status--ausente_excusa { color: #D97706; background: #FEF3C7; border-color: #D97706; }
+    .att-public__empty, .att-public__loading { color: #64748b; padding: 24px 0; }
+    .att-public__back { display: inline-block; margin-bottom: 16px; color: #534AB7; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="pv-wrapper">
+    <div class="att-public">
+      <a class="att-public__back" href="index.html">← Volver al temario</a>
+      <div class="att-public__header">
+        <h1>Llamado a lista</h1>
+        <p>
+          Vista pública del piloto SPEED. Solo se muestran códigos de 4 dígitos y el estado de
+          asistencia. No se publican nombres, correos ni documentos de identidad.
+        </p>
+      </div>
+      <div class="att-public__filters">
+        <select id="session-filter" aria-label="Filtrar por clase">
+          <option value="">Todas las clases</option>
+        </select>
+      </div>
+      <div id="attendance-root">
+        <p class="att-public__loading">Cargando asistencia…</p>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="asistencia.js"></script>
+</body>
+</html>
