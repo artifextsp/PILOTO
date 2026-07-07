@@ -46,6 +46,27 @@ a { color: #534AB7; }
   border-bottom: 1px solid var(--color-border-tertiary);
 }
 
+.site-attendance-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #534AB7;
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none !important;
+  box-shadow: 0 2px 10px rgba(83, 74, 183, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.site-attendance-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(83, 74, 183, 0.45);
+}
+
 .site-header__bar {
   display: flex;
   align-items: center;
