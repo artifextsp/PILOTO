@@ -10,25 +10,19 @@ const OPTION_META = [
 ];
 
 let client;
-let studentCode = "";
+let studentCode = localStorage.getItem("speed_quiz_code") || "";
 let gameId = null;
 let pollTimer = null;
 let submitting = false;
-
-function getSavedCode() {
-  return localStorage.getItem("speed_quiz_code") || "";
-}
 
 function getRoot() {
   return document.getElementById("quiz-root");
 }
 
-function renderLogin(message = "") {
-  const savedCode = getSavedCode();
+function renderLogin() {
   getRoot().innerHTML = `
     <div class="quiz-public__card">
       <p>Ingresa tu código de estudiante para unirte al cuestionario activo.</p>
-      ${message ? `<p class="quiz-public__empty">${message}</p>` : ""}
       <form class="quiz-public__login" id="quiz-login-form">
         <label for="quiz-code-input">Código de 4 dígitos</label>
         <input
@@ -37,8 +31,7 @@ function renderLogin(message = "") {
           inputmode="numeric"
           pattern="[0-9]{4}"
           placeholder="0000"
-          value="${savedCode}"
-          autocomplete="off"
+          value="${studentCode}"
           required
         />
         <button type="submit">Entrar al cuestionario</button>
@@ -219,13 +212,8 @@ async function pollState() {
     return;
   }
   if (data?.error) {
-    studentCode = "";
-    gameId = null;
-    if (pollTimer) {
-      clearInterval(pollTimer);
-      pollTimer = null;
-    }
-    renderLogin(data.error);
+    renderLogin();
+    alert(data.error);
     return;
   }
 
@@ -269,6 +257,14 @@ async function bootstrap() {
 
 async function init() {
   client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  if (studentCode) {
+    try {
+      await bootstrap();
+      return;
+    } catch (err) {
+      console.warn(err);
+    }
+  }
   renderLogin();
 }
 
