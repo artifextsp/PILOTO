@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Puntajes de cuestionarios · Proyecto SPEED</title>
+  <link rel="stylesheet" href="site.css" />
+  <style>
+    .quiz-scores { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
+    .quiz-scores__hero {
+      background: linear-gradient(135deg, #534ab7 0%, #0f766e 100%);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.28);
+    }
+    .quiz-scores__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.95);
+      color: #312e81 !important;
+      font-weight: 700;
+      text-decoration: none !important;
+    }
+    .quiz-scores__hero h1 { margin: 0 0 8px; color: #fff; font-size: 2rem; }
+    .quiz-scores__hero p { margin: 0; color: rgba(255,255,255,0.92); line-height: 1.5; }
+    .quiz-scores__roll {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+    .quiz-scores__roll h2 { margin: 0 0 4px; font-size: 1.1rem; }
+    .quiz-scores__roll-meta { color: #64748b; font-size: 0.9rem; margin-bottom: 12px; }
+    .quiz-scores__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+    }
+    .quiz-scores__cell {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      background: #fafafa;
+    }
+    .quiz-scores__code {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-family: ui-monospace, monospace;
+    }
+    .quiz-scores__points {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #312e81;
+      border: 1px solid #c7d2fe;
+    }
+    .quiz-scores__empty, .quiz-scores__loading { color: #64748b; padding: 24px 0; }
+  </style>
+</head>
+<body>
+  <div class="pv-wrapper">
+    <div class="quiz-scores">
+      <header class="quiz-scores__hero">
+        <a class="quiz-scores__back" href="index.html">← Volver al temario</a>
+        <h1>Puntajes de cuestionarios</h1>
+        <p>
+          Consulta tus puntos por código de 4 dígitos. Solo se muestran códigos y puntajes, sin
+          nombres ni datos sensibles.
+        </p>
+      </header>
+      <div id="quiz-scores-root">
+        <p class="quiz-scores__loading">Cargando puntajes…</p>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="quiz-puntos.js"></script>
+</body>
+</html>

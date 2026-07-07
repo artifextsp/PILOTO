@@ -24,6 +24,7 @@ function renderLogin() {
     <div class="quiz-public__card">
       <p>Ingresa tu código de estudiante para unirte al cuestionario activo.</p>
       <form class="quiz-public__login" id="quiz-login-form">
+        <label for="quiz-code-input">Código de 4 dígitos</label>
         <input
           id="quiz-code-input"
           maxlength="4"
@@ -55,18 +56,66 @@ function renderLogin() {
 function renderWaiting(message, score = 0) {
   getRoot().innerHTML = `
     <div class="quiz-public__card">
-      <div class="quiz-public__score">Puntos: ${score}</div>
+      <div class="quiz-public__score">Puntos acumulados: ${score}</div>
       <p class="quiz-public__waiting">${message}</p>
     </div>
   `;
 }
 
+function renderSummary(summary) {
+  if (!summary?.length) return "";
+  const items = summary
+    .map((item) => {
+      const answered = item.selected_option != null;
+      const cls = !answered ? "is-skip" : item.is_correct ? "is-ok" : "is-bad";
+      const label = !answered
+        ? "Sin responder"
+        : item.is_correct
+          ? "Correcta"
+          : "Incorrecta";
+      return `<div class="quiz-public__summary-item ${cls}">
+        <div>
+          <strong>Pregunta ${item.question_number}</strong>
+          <div>${item.question_text}</div>
+        </div>
+        <span>${label}</span>
+      </div>`;
+    })
+    .join("");
+  return `<section class="quiz-public__summary"><h3>Tu resumen</h3><div class="quiz-public__summary-list">${items}</div></section>`;
+}
+
+function renderRanking(ranking) {
+  if (!ranking?.length) return "";
+  const items = ranking
+    .map((row, index) => {
+      const isMe = row.student_code === studentCode;
+      return `<div class="quiz-public__ranking-item ${isMe ? "is-me" : ""}">
+        <span>#${index + 1} · Código ${row.student_code}${isMe ? " (tú)" : ""}</span>
+        <strong>${row.total_score} pts</strong>
+      </div>`;
+    })
+    .join("");
+  return `<section class="quiz-public__ranking"><h3>Ranking final</h3><div class="quiz-public__ranking-list">${items}</div></section>`;
+}
+
 function renderFinished(state) {
+  const correct = (state.answer_summary || []).filter((item) => item.is_correct).length;
+  const incorrect = (state.answer_summary || []).filter(
+    (item) => item.selected_option != null && !item.is_correct
+  ).length;
+
   getRoot().innerHTML = `
     <div class="quiz-public__card">
-      <h2>Juego finalizado</h2>
+      <h2 class="quiz-public__finished-title">Juego finalizado</h2>
       <div class="quiz-public__score">Puntos totales: ${state.total_score || 0}</div>
-      <p class="quiz-public__empty">Gracias por participar. Puedes cerrar esta ventana o volver al temario.</p>
+      <p class="quiz-public__empty">
+        Respondiste ${correct} correcta(s) y ${incorrect} incorrecta(s).
+      </p>
+      ${renderSummary(state.answer_summary)}
+      ${renderRanking(state.ranking)}
+      <p class="quiz-public__empty">También puedes consultar tus puntajes en
+        <a href="quiz-puntos.html">Puntajes de cuestionarios</a>.</p>
     </div>
   `;
 }
@@ -119,7 +168,7 @@ function renderQuestion(state) {
 
   getRoot().innerHTML = `
     <div class="quiz-public__card">
-      <div class="quiz-public__score">Puntos: ${state.total_score || 0}</div>
+      <div class="quiz-public__score">Puntos acumulados: ${state.total_score || 0}</div>
       <p class="quiz-public__question">${question.question_text}</p>
       ${question.question_image_url ? `<img class="quiz-public__question-image" src="${question.question_image_url}" alt="" />` : ""}
       <div class="quiz-public__options">${optionsHtml}</div>
@@ -169,7 +218,10 @@ async function pollState() {
   }
 
   if (data.status === "waiting") {
-    renderWaiting(`Conectado al cuestionario "${data.quiz_title}". Esperando que el docente inicie…`, data.total_score || 0);
+    renderWaiting(
+      `Conectado al cuestionario "${data.quiz_title}". Esperando que el docente inicie…`,
+      data.total_score || 0
+    );
     return;
   }
 

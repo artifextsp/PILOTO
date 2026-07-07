@@ -7,9 +7,28 @@
   <link rel="stylesheet" href="site.css" />
   <style>
     .att-public { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
-    .att-public__header { margin-bottom: 24px; }
-    .att-public__header h1 { font-size: 1.75rem; margin: 0 0 8px; }
-    .att-public__header p { color: #64748b; margin: 0; line-height: 1.5; }
+    .att-public__hero {
+      background: linear-gradient(135deg, #534ab7 0%, #0f766e 100%);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.28);
+    }
+    .att-public__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.95);
+      color: #312e81 !important;
+      font-weight: 700;
+      text-decoration: none !important;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+    }
+    .att-public__hero h1 { margin: 0 0 8px; color: #fff; font-size: 2rem; }
+    .att-public__hero p { margin: 0; color: rgba(255,255,255,0.92); line-height: 1.5; }
     .att-public__filters { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
     .att-public__filters select { min-width: 280px; padding: 10px 12px; border-radius: 8px; border: 1px solid #d0d7de; }
     .att-public__roll { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
@@ -23,20 +42,19 @@
     .att-public__status--ausente { color: #DC2626; background: #FEE2E2; border-color: #DC2626; }
     .att-public__status--ausente_excusa { color: #D97706; background: #FEF3C7; border-color: #D97706; }
     .att-public__empty, .att-public__loading { color: #64748b; padding: 24px 0; }
-    .att-public__back { display: inline-block; margin-bottom: 16px; color: #534AB7; text-decoration: none; }
   </style>
 </head>
 <body>
   <div class="pv-wrapper">
     <div class="att-public">
-      <a class="att-public__back" href="index.html">← Volver al temario</a>
-      <div class="att-public__header">
+      <header class="att-public__hero">
+        <a class="att-public__back" href="index.html">← Volver al temario</a>
         <h1>Llamado a lista</h1>
         <p>
           Vista pública del piloto SPEED. Solo se muestran códigos de 4 dígitos y el estado de
           asistencia. No se publican nombres, correos ni documentos de identidad.
         </p>
-      </div>
+      </header>
       <div class="att-public__filters">
         <select id="session-filter" aria-label="Filtrar por clase">
           <option value="">Todas las clases</option>
