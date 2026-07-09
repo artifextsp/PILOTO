@@ -71,6 +71,8 @@ function bindImageFallback(img) {
 }
 
 function openLightbox(img) {
+  const ZOOM_LEVELS = [1, 1.25, 1.5, 2, 2.5, 3, 4];
+
   const overlay = document.createElement("div");
   overlay.className = "markdown-lightbox";
   overlay.setAttribute("role", "dialog");
@@ -81,29 +83,146 @@ function openLightbox(img) {
   closeBtn.type = "button";
   closeBtn.className = "markdown-lightbox__close";
   closeBtn.setAttribute("aria-label", "Cerrar");
-  closeBtn.textContent = "×";
+  closeBtn.innerHTML = "&times;";
+
+  const viewport = document.createElement("div");
+  viewport.className = "markdown-lightbox__viewport";
 
   const zoomImg = document.createElement("img");
   zoomImg.className = "markdown-lightbox__img";
   zoomImg.src = img.currentSrc || img.src;
   zoomImg.alt = img.alt || "";
+  zoomImg.draggable = false;
+
+  const controls = document.createElement("div");
+  controls.className = "markdown-lightbox__controls";
+  controls.innerHTML = `
+    <button type="button" class="markdown-lightbox__tool" data-action="zoom-out" aria-label="Alejar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="M21 21l-4.3-4.3"></path>
+        <path d="M8 11h6"></path>
+      </svg>
+    </button>
+    <span class="markdown-lightbox__zoom-label" aria-live="polite">100%</span>
+    <button type="button" class="markdown-lightbox__tool" data-action="zoom-in" aria-label="Acercar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="M21 21l-4.3-4.3"></path>
+        <path d="M11 8v6"></path>
+        <path d="M8 11h6"></path>
+      </svg>
+    </button>
+    <button type="button" class="markdown-lightbox__tool markdown-lightbox__tool--text" data-action="reset">
+      Ajustar
+    </button>
+  `;
+
+  const zoomLabel = controls.querySelector(".markdown-lightbox__zoom-label");
+  const zoomInBtn = controls.querySelector('[data-action="zoom-in"]');
+  const zoomOutBtn = controls.querySelector('[data-action="zoom-out"]');
+
+  let levelIndex = 0;
+  let baseWidth = 0;
+
+  const applyZoom = () => {
+    if (!baseWidth) return;
+    const level = ZOOM_LEVELS[levelIndex];
+    zoomImg.style.width = `${Math.round(baseWidth * level)}px`;
+    zoomImg.style.height = "auto";
+    zoomLabel.textContent = `${Math.round(level * 100)}%`;
+    viewport.classList.toggle("is-zoomed", level > 1);
+    zoomOutBtn.disabled = levelIndex === 0;
+    zoomInBtn.disabled = levelIndex === ZOOM_LEVELS.length - 1;
+  };
+
+  const fitToViewport = () => {
+    const nw = zoomImg.naturalWidth;
+    const nh = zoomImg.naturalHeight;
+    if (!nw || !nh) return;
+
+    const padding = 40;
+    const vw = Math.max(viewport.clientWidth - padding, 200);
+    const vh = Math.max(viewport.clientHeight - padding, 200);
+    const fitRatio = Math.min(vw / nw, vh / nh);
+    baseWidth = nw * fitRatio;
+    applyZoom();
+  };
+
+  const zoomIn = () => {
+    if (levelIndex >= ZOOM_LEVELS.length - 1) return;
+    levelIndex += 1;
+    applyZoom();
+  };
+
+  const zoomOut = () => {
+    if (levelIndex <= 0) return;
+    levelIndex -= 1;
+    applyZoom();
+  };
+
+  const resetZoom = () => {
+    levelIndex = 0;
+    applyZoom();
+    viewport.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
 
   const close = () => {
+    window.removeEventListener("resize", fitToViewport);
+    document.removeEventListener("keydown", onKey);
     overlay.remove();
     document.body.style.overflow = "";
-    document.removeEventListener("keydown", onKey);
   };
 
   const onKey = (event) => {
-    if (event.key === "Escape") close();
+    if (event.key === "Escape") {
+      close();
+      return;
+    }
+    if (event.key === "+" || event.key === "=") {
+      event.preventDefault();
+      zoomIn();
+    }
+    if (event.key === "-") {
+      event.preventDefault();
+      zoomOut();
+    }
+    if (event.key === "0") {
+      event.preventDefault();
+      resetZoom();
+    }
   };
 
-  closeBtn.addEventListener("click", close);
-  overlay.addEventListener("click", close);
+  controls.addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-action]");
+    if (!btn || btn.disabled) return;
+    event.stopPropagation();
+    const action = btn.dataset.action;
+    if (action === "zoom-in") zoomIn();
+    if (action === "zoom-out") zoomOut();
+    if (action === "reset") resetZoom();
+  });
+
+  closeBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    close();
+  });
+
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) close();
+  });
+
+  viewport.addEventListener("click", (event) => event.stopPropagation());
+  controls.addEventListener("click", (event) => event.stopPropagation());
   zoomImg.addEventListener("click", (event) => event.stopPropagation());
+
+  zoomImg.addEventListener("load", fitToViewport);
+  if (zoomImg.complete) fitToViewport();
+  window.addEventListener("resize", fitToViewport);
   document.addEventListener("keydown", onKey);
 
-  overlay.append(closeBtn, zoomImg);
+  viewport.append(zoomImg);
+  overlay.append(closeBtn, viewport, controls);
   document.body.append(overlay);
   document.body.style.overflow = "hidden";
 }
