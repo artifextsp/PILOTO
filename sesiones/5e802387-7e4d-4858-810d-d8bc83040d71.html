@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sesión 2: Breadboards, circuitos en serie y en paralalo · SPEED</title>
+  <link rel="stylesheet" href="../site.css" />
+  <!-- SPEED build: 2026-07-03-publish-fresh-v1 -->
+  <!-- SPEED published-at: 2026-07-09T02:31:23.541Z -->
+</head>
+<body>
+  <div class="pv-wrapper">
+    <div class="pv-container">
+      <nav class="site-nav site-nav--bar">
+        <a href="../index.html" class="site-nav__back">← Volver al índice del curso</a>
+        <a class="site-pdf-icon-btn site-pdf-icon-btn--nav" href="5e802387-7e4d-4858-810d-d8bc83040d71.pdf" download="sesion-2-breadboards-circuitos-en-serie-y-en-paralalo.pdf" title="Descargar plan de clase (PDF)" aria-label="Descargar plan de clase en PDF"><svg class="site-pdf-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+      </nav>
+
+      <div class="pv-hero pv-hero--by-status" data-status="en_revision"
+        style="background:#EAF3DE;border-color:#4A7A18;border-left-color:#4A7A18">
+        <div class="pv-hero__phase" style="background:#4A7A18;color:#fff">A</div>
+        <div class="pv-hero__content">
+          <p class="pv-hero__phase-name" style="color:#4A7A18">
+            Fase A — Análisis
+          </p>
+          <h1 class="pv-hero__title" style="color:#1F3D12">
+            Sesión 2: Breadboards, circuitos en serie y en paralalo
+          </h1>
+          <div class="pv-hero__meta" style="color:#3D6B24">
+            <span>Virtual</span><span>·</span><span>9 de julio de 2026</span>
+          </div>
+          <div class="pv-hero__status">
+            <span class="pv-hero__status-pill"
+              style="color:#639922;border-color:#4A7A18;background:rgba(255,255,255,0.88)">
+              <span class="pv-hero__status-dot" style="background:#639922"></span>
+              En desarrollo
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pv-goal" style="border-left-color:#534AB7">
+        <div>
+          <strong>Lo que vas a lograr hoy</strong>
+          <p>Estudio de la breadboard e implementación de tipos de circuitos en la misma</p>
+        </div>
+      </div>
+
+      <div class="pv-sections">
+        <details class="pv-card">
+        <summary>
+          <span class="pv-card__number" style="background:#534AB7">1</span>
+          <div class="pv-card__header-text">
+            <div class="pv-card__title">TINKERCAD - ACTIVACIÓN DE CUENTAS</div>
+            <p class="pv-card__desc">Activación de cuentas e identificación de porcesos básicos a utilizar con el simulador </p>
+          </div>
+        </summary>
+        <div class="pv-card__body">
+          <div class="pv-markdown"><p><span style="color: #F97316"><strong>Acceso a Tinkercad</strong></span></p>
+<ol>
+<li><a href="https://www.tinkercad.com/dashboard" target="_blank" rel="noopener noreferrer">tinkercad.com</a> </li>
+<li>Clic en +Create (Esquiena superior derecha)</li>
+<li>Clic en Circuits</li>
+<li>Esquematiza</li>
+<li>Clic en el nombre del esquema (por defecto) y escribe el nombre que le desea dar al esquema.</li>
+</ol>
+</div>
+        </div>
+      </details>
+<details class="pv-card">
+        <summary>
+          <span class="pv-card__number" style="background:#534AB7">2</span>
+          <div class="pv-card__header-text">
+            <div class="pv-card__title">BREADBOARD</div>
+            <p class="pv-card__desc">Comprender la estructura de una breadboard y construir circuitos en serie y en paralelo sobre una breadboard</p>
+          </div>
+        </summary>
+        <div class="pv-card__body">
+          <div class="pv-markdown"><p><span style="color: #F97316; font-size: 20px"><strong>PROTOBOARD</strong></span></p>
+<p><figure class="markdown-image-card markdown-image-card--zoomable"><div class="markdown-image-card__frame" role="button" tabindex="0" aria-label="Ampliar imagen"><img class="markdown-image-card__img" src="https://lh3.googleusercontent.com/d/1NoFugVYv0I0Yy___2juwOlUfz3GHXPxc=w1920" data-fallbacks="https%3A%2F%2Fdrive.google.com%2Fthumbnail%3Fid%3D1NoFugVYv0I0Yy___2juwOlUfz3GHXPxc%26sz%3Dw1920|https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D1NoFugVYv0I0Yy___2juwOlUfz3GHXPxc" alt="Protoboard"></div><figcaption class="markdown-image-card__caption">Protoboard</figcaption></figure></p>
+<div class="markdown-spacer"></div><div class="markdown-spacer"></div><div class="markdown-spacer"></div><p><span style="color: #F97316; font-size: 20px"><strong>CIRCUITO EN SERIE </strong></span></p>
+<div class="markdown-spacer"></div><p><figure class="markdown-image-card markdown-image-card--zoomable"><div class="markdown-image-card__frame" role="button" tabindex="0" aria-label="Ampliar imagen"><img class="markdown-image-card__img" src="https://lh3.googleusercontent.com/d/1Z0cVhvFb7lEgyarqOGpuyXjuuAzedyes=w1920" data-fallbacks="https%3A%2F%2Fdrive.google.com%2Fthumbnail%3Fid%3D1Z0cVhvFb7lEgyarqOGpuyXjuuAzedyes%26sz%3Dw1920|https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D1Z0cVhvFb7lEgyarqOGpuyXjuuAzedyes" alt="Imagen"></div></figure></p>
+<div class="markdown-spacer"></div><div class="markdown-spacer"></div><p><span style="color: #F97316; font-size: 20px"><strong>CIRCUITO EN PARALELO </strong></span></p>
+<div class="markdown-spacer"></div><p><figure class="markdown-image-card markdown-image-card--zoomable"><div class="markdown-image-card__frame" role="button" tabindex="0" aria-label="Ampliar imagen"><img class="markdown-image-card__img" src="https://lh3.googleusercontent.com/d/1hkptCO8RwMd0DVQAhGR3uf3jblLr0NsD=w1920" data-fallbacks="https%3A%2F%2Fdrive.google.com%2Fthumbnail%3Fid%3D1hkptCO8RwMd0DVQAhGR3uf3jblLr0NsD%26sz%3Dw1920|https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D1hkptCO8RwMd0DVQAhGR3uf3jblLr0NsD" alt="Imagen"></div></figure></p>
+<div class="markdown-spacer"></div><p>Referencias:</p>
+<p><a href="https://portalacademico.cch.unam.mx/cibernetica1/implementacion-de-circuitos-logicos/tableta-protoboard" target="_blank" rel="noopener noreferrer">Breadboard</a></p>
+</div>
+        </div>
+      </details>
+<details class="pv-card">
+        <summary>
+          <span class="pv-card__number" style="background:#534AB7">3</span>
+          <div class="pv-card__header-text">
+            <div class="pv-card__title">EJERCICIOS CIRCUITOS EN SERIE Y PARALELO</div>
+            <p class="pv-card__desc">Ejercicios de práctica y afianzamiento de los conceptos de circuitos en serie y circuitos en paralelo</p>
+          </div>
+        </summary>
+        <div class="pv-card__body">
+          <div class="pv-markdown"><div class="markdown-styled-block" style="font-size: 13px"><p><strong>Ejercicio 1 </strong>— Dos LEDs en serie (9V)</p>
+<p><span style="color: #F97316"><strong>Componentes</strong></span>:</p>
+<ul>
+<li>1 batería 9V</li>
+<li>2 LEDs rojos</li>
+<li>1 resistencia de 330Ω</li>
+</ul>
+<div class="markdown-spacer"></div><p><strong>Mediciones</strong>:</p>
+<p><strong>Voltaje</strong>:</p>
+<ul>
+<li>batería</li>
+<li>resistencia</li>
+<li>LED 1</li>
+<li>LED 2</li>
+</ul>
+<p><strong>Corriente</strong>:</p>
+<ul>
+<li>corriente total</li>
+</ul>
+<hr>
+<p><strong>Ejercicio 2</strong> — Dos LEDs en paralelo (3V)</p>
+<p><span style="color: #F97316"><strong>Componentes</strong></span>:</p>
+<ul>
+<li>batería 3V</li>
+<li>2 LEDs</li>
+<li>2 resistencias 220Ω</li>
+</ul>
+<p><strong>Mediciones</strong>:</p>
+<p><strong>Voltaje</strong>:</p>
+<ul>
+<li>cada LED</li>
+</ul>
+<p><strong>Corriente</strong>:</p>
+<ul>
+<li>rama 1</li>
+<li>rama 2</li>
+<li>corriente total</li>
+</ul>
+<hr>
+<div class="markdown-spacer"></div><strong>
+Ejercicio 3 </strong>— LED + buzzer en paralelo (9V)<div class="markdown-spacer"></div><p><span style="color: #F97316"><strong>Componentes</strong></span>:</p>
+<ul>
+<li>batería 9V</li>
+<li>LED</li>
+<li>buzzer</li>
+<li>resistencia LED 330Ω</li>
+<li>resistencia buzzer 220Ω</li>
+</ul>
+<p><strong>Mediciones</strong>:</p>
+<p><strong>Voltaje</strong>:</p>
+<ul>
+<li>LED</li>
+<li>buzzer</li>
+</ul>
+<p><strong>Corriente</strong>:</p>
+<ul>
+<li>rama LED</li>
+<li>rama buzzer</li>
+<li>corriente total</li>
+</ul>
+<hr>
+<div class="markdown-spacer"></div><p><strong>Ejercicio 4 </strong>— Piezo + motor en paralelo (9V)</p>
+<p><span style="color: #F97316"><strong>Componentes</strong></span>:</p>
+<ul>
+<li>batería 9V</li>
+<li>piezo</li>
+<li>motor</li>
+<li>resistencia piezo 100Ω</li>
+<li>resistencia motor 47Ω</li>
+</ul>
+<div class="markdown-spacer"></div><p><strong>Mediciones</strong>:</p>
+<p><strong>Voltaje</strong>:</p>
+<ul>
+<li>piezo</li>
+<li>motor</li>
+</ul>
+<p><strong>Corriente</strong>:</p>
+<ul>
+<li>piezo</li>
+<li>motor</li>
+<li>total</li>
+</ul>
+<hr>
+<div class="markdown-spacer"></div><p><strong>Ejercicio 5 </strong> — Tres LEDs en paralelo (3V)</p>
+<p><span style="color: #F97316"><strong>Componentes</strong></span>:</p>
+<ul>
+<li>batería 3V</li>
+<li>3 LEDs</li>
+<li>3 resistencias 220Ω</li>
+</ul>
+<p>Una resistencia por LED.</p>
+<div class="markdown-spacer"></div><p><strong>Mediciones</strong>:</p>
+<p><strong>Voltaje</strong>:</p>
+<ul>
+<li>cada LED</li>
+</ul>
+<p><strong>Corriente</strong>:</p>
+<ul>
+<li>cada rama</li>
+<li>corriente total</li>
+</ul>
+<hr>
+<div class="markdown-spacer"></div><p><strong>Ejercicio 6 </strong>— LED + buzzer + motor en paralelo (9V)</p>
+<p><span style="color: #F97316"><strong>Componentes</strong></span>:</p>
+<ul>
+<li>batería 9V</li>
+<li>LED</li>
+<li>buzzer</li>
+<li>motor</li>
+<li>resistencia LED 330Ω</li>
+<li>resistencia buzzer 220Ω</li>
+<li>resistencia motor 47Ω</li>
+</ul>
+<p><strong>Mediciones</strong>:</p>
+<p><strong>Voltaje</strong>:</p>
+<ul>
+<li>LED</li>
+<li>buzzer</li>
+<li>motor</li>
+</ul>
+<p><strong>Corriente</strong>:</p>
+<ul>
+<li>cada rama</li>
+<li>corriente total</div></li>
+</ul>
+</div>
+        </div>
+      </details>
+      </div>
+
+      <div class="pv-footer">
+        Proyecto SPEED · Análisis · Uniminuto 2026
+      </div>
+    </div>
+  </div>
+  <script src="../site.js"></script>
+</body>
+</html>
