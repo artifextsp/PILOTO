@@ -92,8 +92,33 @@
   border-radius: 999px;
   background: #eef2ff;
   color: #312e81;
-  font-weight: 800;
-  margin-bottom: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.quiz-public__timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 16px 12px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+  font-weight: 700;
+}
+
+.quiz-public__timer.is-urgent {
+  background: #fef2f2;
+  color: #991b1b;
+  border-color: #fecaca;
+  animation: quiz-timer-pulse 1s ease-in-out infinite;
+}
+
+@keyframes quiz-timer-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
 }
 
 .quiz-public__question {

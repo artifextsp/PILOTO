@@ -13,7 +13,9 @@ let client;
 let studentCode = "";
 let gameId = null;
 let pollTimer = null;
+let uiTickTimer = null;
 let submitting = false;
+let lastState = null;
 
 function getSavedCode() {
   return localStorage.getItem("speed_quiz_code") || "";
@@ -21,6 +23,68 @@ function getSavedCode() {
 
 function getRoot() {
   return document.getElementById("quiz-root");
+}
+
+function stopUiTick() {
+  if (uiTickTimer) {
+    clearInterval(uiTickTimer);
+    uiTickTimer = null;
+  }
+}
+
+function startUiTick() {
+  stopUiTick();
+  uiTickTimer = setInterval(() => {
+    if (!lastState || lastState.status !== "active") return;
+    if (lastState.seconds_left == null && !lastState.question?.time_limit_seconds) return;
+    renderQuestion(lastState, true);
+  }, 250);
+}
+
+function computeLocalSecondsLeft(state) {
+  if (!state || state.status !== "active") return null;
+  const now = Date.now();
+
+  if (
+    state.question_phase === "answering" &&
+    state.question?.time_limit_seconds &&
+    state.question_started_at
+  ) {
+    const ends =
+      new Date(state.question_started_at).getTime() +
+      state.question.time_limit_seconds * 1000;
+    return Math.max(0, Math.ceil((ends - now) / 1000));
+  }
+
+  if (
+    state.question_phase === "reveal" &&
+    state.auto_advance &&
+    state.reveal_started_at
+  ) {
+    const delay = state.auto_advance_delay_seconds ?? 5;
+    const ends = new Date(state.reveal_started_at).getTime() + delay * 1000;
+    return Math.max(0, Math.ceil((ends - now) / 1000));
+  }
+
+  if (typeof state.seconds_left === "number") return state.seconds_left;
+  return null;
+}
+
+function renderTimer(state) {
+  const secondsLeft = computeLocalSecondsLeft(state);
+  if (secondsLeft == null) return "";
+
+  const isAnswering = state.question_phase === "answering";
+  const label = isAnswering
+    ? "Tiempo restante"
+    : state.auto_advance
+      ? "Siguiente pregunta en"
+      : null;
+  if (!label) return "";
+
+  return `<div class="quiz-public__timer ${secondsLeft <= 5 ? "is-urgent" : ""}" aria-live="polite">
+    ${label}: <strong>${secondsLeft}s</strong>
+  </div>`;
 }
 
 function renderLogin(message = "") {
@@ -61,6 +125,7 @@ function renderLogin(message = "") {
 }
 
 function renderWaiting(message, score = 0) {
+  stopUiTick();
   getRoot().innerHTML = `
     <div class="quiz-public__card">
       <div class="quiz-public__score">Puntos acumulados: ${score}</div>
@@ -107,6 +172,7 @@ function renderRanking(ranking) {
 }
 
 function renderFinished(state) {
+  stopUiTick();
   const correct = (state.answer_summary || []).filter((item) => item.is_correct).length;
   const incorrect = (state.answer_summary || []).filter(
     (item) => item.selected_option != null && !item.is_correct
@@ -127,7 +193,7 @@ function renderFinished(state) {
   `;
 }
 
-function renderQuestion(state) {
+function renderQuestion(state, fromTick = false) {
   const question = state.question;
   if (!question) {
     renderWaiting("Esperando la siguiente pregunta…", state.total_score || 0);
@@ -162,7 +228,7 @@ function renderQuestion(state) {
 
   let feedback = "";
   if (state.question_phase === "answering" && myResponse) {
-    feedback = `<p class="quiz-public__waiting">Respuesta enviada. Esperando que el docente revele la respuesta…</p>`;
+    feedback = `<p class="quiz-public__waiting">Respuesta enviada. Esperando el revelado…</p>`;
   }
   if (isReveal && myResponse) {
     feedback = `<div class="quiz-public__feedback ${
@@ -171,11 +237,21 @@ function renderQuestion(state) {
       ${myResponse.is_correct ? "¡Correcto! +1 punto" : "Respuesta incorrecta"}
       ${question.explanation_text ? `<p>${question.explanation_text}</p>` : ""}
     </div>`;
+  } else if (isReveal && !myResponse) {
+    feedback = `<div class="quiz-public__feedback quiz-public__feedback--bad">
+      Tiempo agotado o sin respuesta
+      ${question.explanation_text ? `<p>${question.explanation_text}</p>` : ""}
+    </div>`;
   }
+
+  const activeEl = document.activeElement;
+  const focusedOption =
+    fromTick && activeEl?.dataset?.option ? activeEl.dataset.option : null;
 
   getRoot().innerHTML = `
     <div class="quiz-public__card">
       <div class="quiz-public__score">Puntos acumulados: ${state.total_score || 0}</div>
+      ${renderTimer(state)}
       <p class="quiz-public__question">${question.question_text}</p>
       ${question.question_image_url ? `<img class="quiz-public__question-image" src="${question.question_image_url}" alt="" />` : ""}
       <div class="quiz-public__options">${optionsHtml}</div>
@@ -186,6 +262,12 @@ function renderQuestion(state) {
   getRoot().querySelectorAll("[data-option]").forEach((button) => {
     button.addEventListener("click", () => submitAnswer(question.id, button.dataset.option));
   });
+
+  if (focusedOption) {
+    getRoot().querySelector(`[data-option="${focusedOption}"]`)?.focus();
+  }
+
+  startUiTick();
 }
 
 async function submitAnswer(questionId, selectedOption) {
@@ -221,6 +303,8 @@ async function pollState() {
   if (data?.error) {
     studentCode = "";
     gameId = null;
+    lastState = null;
+    stopUiTick();
     if (pollTimer) {
       clearInterval(pollTimer);
       pollTimer = null;
@@ -228,6 +312,8 @@ async function pollState() {
     renderLogin(data.error);
     return;
   }
+
+  lastState = data;
 
   if (data.status === "waiting") {
     renderWaiting(
@@ -256,7 +342,9 @@ async function bootstrap() {
   getRoot().innerHTML = '<p class="quiz-public__loading">Conectando…</p>';
   const active = await findActiveGame();
   if (!active) {
-    renderWaiting("No hay un cuestionario activo en este momento. Vuelve a intentar cuando el docente lo lance.");
+    renderWaiting(
+      "No hay un cuestionario activo en este momento. Vuelve a intentar cuando el docente lo lance."
+    );
     return;
   }
   gameId = active.game_id;
@@ -264,7 +352,7 @@ async function bootstrap() {
   if (pollTimer) clearInterval(pollTimer);
   pollTimer = setInterval(() => {
     pollState().catch(() => {});
-  }, 2000);
+  }, 1000);
 }
 
 async function init() {
