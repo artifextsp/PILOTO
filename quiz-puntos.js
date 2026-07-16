@@ -36,6 +36,26 @@ function groupByGame(rows) {
   return [...map.values()].sort((a, b) => new Date(b.ended_at) - new Date(a.ended_at));
 }
 
+/** Suma puntos de todos los cuestionarios por código (sin nombres). */
+function buildOverallRanking(rows) {
+  const map = new Map();
+  for (const row of rows) {
+    const code = String(row.student_code || "").trim();
+    if (!code) continue;
+    const current = map.get(code) || {
+      student_code: code,
+      total_score: 0,
+      total_questions: 0,
+      games_played: 0,
+    };
+    current.total_score += Number(row.total_score) || 0;
+    current.total_questions += Number(row.total_questions) || 0;
+    current.games_played += 1;
+    map.set(code, current);
+  }
+  return [...map.values()].sort(sortByPointsDesc);
+}
+
 function renderGrid(records, totalQuestions) {
   const cells = [...records]
     .sort(sortByCode)
@@ -50,25 +70,63 @@ function renderGrid(records, totalQuestions) {
   return `<div class="quiz-scores__grid">${cells}</div>`;
 }
 
-function renderRankingList(records, totalQuestions) {
+function renderRankingList(records, totalQuestions, title = "Ranking por puntos") {
   const items = [...records]
     .sort(sortByPointsDesc)
     .map((record, index) => {
       const place = index + 1;
       const medal =
         place === 1 ? " is-gold" : place === 2 ? " is-silver" : place === 3 ? " is-bronze" : "";
+      const pointsLabel =
+        totalQuestions != null
+          ? `${record.total_score} / ${totalQuestions} pts`
+          : `${record.total_score} pts`;
       return `<li class="quiz-scores__rank-item${medal}">
         <span class="quiz-scores__rank-place">#${place}</span>
         <span class="quiz-scores__rank-code">Código ${record.student_code}</span>
-        <strong class="quiz-scores__rank-points">${record.total_score} / ${totalQuestions} pts</strong>
+        <strong class="quiz-scores__rank-points">${pointsLabel}</strong>
       </li>`;
     })
     .join("");
 
-  return `<section class="quiz-scores__ranking" aria-label="Ranking por puntos">
-    <h3>Ranking por puntos</h3>
+  return `<section class="quiz-scores__ranking" aria-label="${title}">
+    <h3>${title}</h3>
     <ol class="quiz-scores__rank-list">${items}</ol>
   </section>`;
+}
+
+function renderOverallRanking(records) {
+  if (!records.length) return "";
+
+  const items = records
+    .map((record, index) => {
+      const place = index + 1;
+      const medal =
+        place === 1 ? " is-gold" : place === 2 ? " is-silver" : place === 3 ? " is-bronze" : "";
+      const gamesLabel =
+        record.games_played === 1
+          ? "1 cuestionario"
+          : `${record.games_played} cuestionarios`;
+      return `<li class="quiz-scores__rank-item${medal}">
+        <span class="quiz-scores__rank-place">#${place}</span>
+        <div class="quiz-scores__rank-main">
+          <span class="quiz-scores__rank-code">Código ${record.student_code}</span>
+          <span class="quiz-scores__rank-meta">${gamesLabel} · ${record.total_score} / ${record.total_questions} posibles</span>
+        </div>
+        <strong class="quiz-scores__rank-points">${record.total_score} pts</strong>
+      </li>`;
+    })
+    .join("");
+
+  return `<article class="quiz-scores__roll quiz-scores__roll--overall">
+    <h2>Ranking general</h2>
+    <p class="quiz-scores__roll-meta">
+      Suma de puntos de todos los cuestionarios finalizados. Solo códigos, sin nombres.
+    </p>
+    <section class="quiz-scores__ranking quiz-scores__ranking--overall" aria-label="Ranking general">
+      <ol class="quiz-scores__rank-list">${items}</ol>
+    </section>
+  </article>`;
 }
 
 function renderGame(game) {
@@ -96,7 +154,9 @@ async function init() {
     return;
   }
 
-  root.innerHTML = groupByGame(data).map(renderGame).join("");
+  const games = groupByGame(data);
+  const overall = buildOverallRanking(data);
+  root.innerHTML = `${games.map(renderGame).join("")}${renderOverallRanking(overall)}`;
 }
 
 init().catch((err) => {

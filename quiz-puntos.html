@@ -133,6 +133,31 @@
       border: 1px solid #c7d2fe;
       white-space: nowrap;
     }
+    .quiz-scores__rank-main {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+    .quiz-scores__rank-meta {
+      font-size: 0.8rem;
+      color: #64748b;
+      font-weight: 500;
+      letter-spacing: 0;
+      font-family: inherit;
+    }
+    .quiz-scores__roll--overall {
+      border: 2px solid #534ab7;
+      background: linear-gradient(180deg, #f8f7ff 0%, #fff 40%);
+      box-shadow: 0 8px 24px rgba(83, 74, 183, 0.12);
+    }
+    .quiz-scores__roll--overall h2 {
+      color: #312e81;
+    }
+    .quiz-scores__ranking--overall {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
     .quiz-scores__empty, .quiz-scores__loading { color: #64748b; padding: 24px 0; }
   </style>
 </head>
@@ -143,8 +168,9 @@
         <a class="quiz-scores__back" href="index.html">← Volver al temario</a>
         <h1>Puntajes de cuestionarios</h1>
         <p>
-          Consulta tus puntos por código de 4 dígitos. Por cada cuestionario verás la grilla de
-          puntajes y el ranking ordenado de mayor a menor. Solo códigos y puntos, sin nombres.
+          Consulta tus puntos por código de 4 dígitos. Por cada cuestionario verás la grilla y el
+          ranking parcial; al final, el ranking general con la suma de todos. Solo códigos, sin
+          nombres.
         </p>
       </header>
       <div id="quiz-scores-root">
