@@ -10,6 +10,15 @@ function formatDateTime(iso) {
   });
 }
 
+function sortByCode(a, b) {
+  return String(a.student_code).localeCompare(String(b.student_code), "es");
+}
+
+function sortByPointsDesc(a, b) {
+  if (b.total_score !== a.total_score) return b.total_score - a.total_score;
+  return sortByCode(a, b);
+}
+
 function groupByGame(rows) {
   const map = new Map();
   for (const row of rows) {
@@ -27,21 +36,47 @@ function groupByGame(rows) {
   return [...map.values()].sort((a, b) => new Date(b.ended_at) - new Date(a.ended_at));
 }
 
-function renderGame(game) {
-  const cells = game.records
-    .sort((a, b) => String(a.student_code).localeCompare(String(b.student_code)))
+function renderGrid(records, totalQuestions) {
+  const cells = [...records]
+    .sort(sortByCode)
     .map(
       (record) => `<div class="quiz-scores__cell">
         <div class="quiz-scores__code">${record.student_code}</div>
-        <span class="quiz-scores__points">${record.total_score} / ${record.total_questions}</span>
+        <span class="quiz-scores__points">${record.total_score} / ${totalQuestions}</span>
       </div>`
     )
     .join("");
 
+  return `<div class="quiz-scores__grid">${cells}</div>`;
+}
+
+function renderRankingList(records, totalQuestions) {
+  const items = [...records]
+    .sort(sortByPointsDesc)
+    .map((record, index) => {
+      const place = index + 1;
+      const medal =
+        place === 1 ? " is-gold" : place === 2 ? " is-silver" : place === 3 ? " is-bronze" : "";
+      return `<li class="quiz-scores__rank-item${medal}">
+        <span class="quiz-scores__rank-place">#${place}</span>
+        <span class="quiz-scores__rank-code">Código ${record.student_code}</span>
+        <strong class="quiz-scores__rank-points">${record.total_score} / ${totalQuestions} pts</strong>
+      </li>`;
+    })
+    .join("");
+
+  return `<section class="quiz-scores__ranking" aria-label="Ranking por puntos">
+    <h3>Ranking por puntos</h3>
+    <ol class="quiz-scores__rank-list">${items}</ol>
+  </section>`;
+}
+
+function renderGame(game) {
   return `<article class="quiz-scores__roll">
     <h2>${game.quiz_title}</h2>
     <p class="quiz-scores__roll-meta">Finalizado · ${formatDateTime(game.ended_at)}</p>
-    <div class="quiz-scores__grid">${cells}</div>
+    ${renderGrid(game.records, game.total_questions)}
+    ${renderRankingList(game.records, game.total_questions)}
   </article>`;
 }
 
@@ -56,7 +91,8 @@ async function init() {
   }
 
   if (!data?.length) {
-    root.innerHTML = '<p class="quiz-scores__empty">Aún no hay cuestionarios finalizados con puntajes publicados.</p>';
+    root.innerHTML =
+      '<p class="quiz-scores__empty">Aún no hay cuestionarios finalizados con puntajes publicados.</p>';
     return;
   }
 
