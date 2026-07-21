@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sesión 3: Microcontroladora Arduino - Programación IA · SPEED</title>
+  <link rel="stylesheet" href="../site.css" />
+  <!-- SPEED build: 2026-07-08-lightbox-zoom-v1 -->
+  <!-- SPEED published-at: 2026-07-21T03:46:08.838Z -->
+</head>
+<body>
+  <div class="pv-wrapper">
+    <div class="pv-container">
+      <nav class="site-nav site-nav--bar">
+        <a href="../index.html" class="site-nav__back">← Volver al índice del curso</a>
+        <a class="site-pdf-icon-btn site-pdf-icon-btn--nav" href="79eae5eb-1433-45d6-8a41-8fec924f338a.pdf" download="sesion-3-microcontroladora-arduino-programacion-ia.pdf" title="Descargar plan de clase (PDF)" aria-label="Descargar plan de clase en PDF"><svg class="site-pdf-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+      </nav>
+
+      <div class="pv-hero pv-hero--by-status" data-status="en_revision"
+        style="background:#EAF3DE;border-color:#4A7A18;border-left-color:#4A7A18">
+        <div class="pv-hero__phase" style="background:#4A7A18;color:#fff">A</div>
+        <div class="pv-hero__content">
+          <p class="pv-hero__phase-name" style="color:#4A7A18">
+            Fase A — Análisis
+          </p>
+          <h1 class="pv-hero__title" style="color:#1F3D12">
+            Sesión 3: Microcontroladora Arduino - Programación IA
+          </h1>
+          <div class="pv-hero__meta" style="color:#3D6B24">
+            <span>Virtual</span><span>·</span><span>14 de julio de 2026</span>
+          </div>
+          <div class="pv-hero__status">
+            <span class="pv-hero__status-pill"
+              style="color:#639922;border-color:#4A7A18;background:rgba(255,255,255,0.88)">
+              <span class="pv-hero__status-dot" style="background:#639922"></span>
+              En desarrollo
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pv-goal" style="border-left-color:#534AB7">
+        <div>
+          <strong>Lo que vas a lograr hoy</strong>
+          <p>Comprender la estructura, funciones básicas de la microcontroladora arduino uno y vibe coding con IA</p>
+        </div>
+      </div>
+
+      <div class="pv-sections">
+        <details class="pv-card">
+        <summary>
+          <span class="pv-card__number" style="background:#534AB7">1</span>
+          <div class="pv-card__header-text">
+            <div class="pv-card__title">Estructura Arduino</div>
+            <p class="pv-card__desc">Estructura y componentes de la microcontroladora Arduino</p>
+          </div>
+        </summary>
+        <div class="pv-card__body">
+          <div class="pv-markdown"><p><span style="color: #F97316"><strong>ARDUINO UNO</strong></span></p>
+<div class="markdown-spacer"></div><p><figure class="markdown-image-card markdown-image-card--zoomable"><div class="markdown-image-card__frame" role="button" tabindex="0" aria-label="Ampliar imagen"><img class="markdown-image-card__img" src="https://lh3.googleusercontent.com/d/15vJr-mh6lbFoKbRfGr1vWp8uXvK_P8b_=w1920" data-fallbacks="https%3A%2F%2Fdrive.google.com%2Fthumbnail%3Fid%3D15vJr-mh6lbFoKbRfGr1vWp8uXvK_P8b_%26sz%3Dw1920|https%3A%2F%2Fdrive.google.com%2Fuc%3Fexport%3Dview%26id%3D15vJr-mh6lbFoKbRfGr1vWp8uXvK_P8b_" alt="Arduino Uno"></div><figcaption class="markdown-image-card__caption">Arduino Uno</figcaption></figure></p>
+<div class="markdown-spacer"></div><div class="markdown-spacer"></div><p><span style="color: #F97316"><strong>Partes principales de la tarjeta Arduino Uno</strong></span></p>
+<div class="markdown-styled-block" style="font-size: 12px"><p><strong>1. POWER</strong> (Pines de alimentación)</p>
+<p>Estos pines permiten alimentar la tarjeta y también suministrar energía a otros componentes.</p>
+<p><strong>2. VIN</strong></p>
+<p><strong>Función</strong>: Entrada de voltaje externo (7V a 12V recomendado).</p>
+<p><strong>Uso</strong>: Alimentar Arduino sin USB.</p>
+<p><strong>Ejemplo</strong>: conectar batería de 9V.</p>
+<p>⸻</p>
+<p><strong>3. GND (Ground)</strong></p>
+<p><strong>Función</strong>: Tierra o negativo del circuito.</p>
+<p><strong>Uso</strong>: Cierra el circuito.</p>
+<p><strong>Ejemplo</strong>: conectar el negativo de un LED o sensor.</p>
+<p>⸻</p>
+<p><strong>4. 5V</strong></p>
+<p><strong>Función</strong>: Salida de 5 voltios regulados.</p>
+<p><strong>Uso</strong>: Alimentar sensores o módulos.</p>
+<p><strong>Ejemplo</strong>: alimentar un sensor ultrasónico HC-SR04.</p>
+<p>⸻</p>
+<p><strong>5.  3.3V</strong></p>
+<p><strong>Función</strong>: Salida de 3.3 voltios.</p>
+<p><strong>Uso</strong>: Alimentar componentes de bajo voltaje.</p>
+<p><strong>Ejemplo</strong>: módulo Bluetooth HC-05.</p>
+<p>⸻</p>
+<p><strong>6. RESET</strong></p>
+<p><strong>Función</strong>: Reinicia el programa.</p>
+<p><strong>Uso</strong>: volver a ejecutar el código desde el inicio.</p>
+<p><strong>Ejemplo</strong>: reiniciar un robot.</p>
+<p>⸻</p>
+<p><strong>7. ANALOG IN</strong> (Entradas analógicas)</p>
+<p><strong>Pines</strong>:</p>
+<p>A0, A1, A2, A3, A4, A5</p>
+<p>Sirven para leer valores variables.</p>
+<p><strong>Rango</strong>:</p>
+<p>0 a 1023</p>
+<p><strong>Voltaje</strong>:</p>
+<p>0V a 5V</p>
+<p>⸻</p>
+<p>A0</p>
+<p><strong>Función</strong>: leer señales analógicas.</p>
+<p><strong>Ejemplo</strong>: leer un potenciómetro.</p>
+<p>⸻</p>
+<p>A1</p>
+<p><strong>Función</strong>: entrada analógica.</p>
+<p><strong>Ejemplo</strong>: sensor de luz.</p>
+<p>⸻</p>
+<p>A2</p>
+<p><strong>Función</strong>: entrada analógica.</p>
+<p><strong>Ejemplo</strong>: sensor de humedad.</p>
+<p>⸻</p>
+<p>A3</p>
+<p><strong>Función</strong>: entrada analógica.</p>
+<p><strong>Ejemplo</strong>: sensor de temperatura.</p>
+<p>⸻</p>
+<p>A4</p>
+<p><strong>Función especial:</strong> I2C (SDA)</p>
+<p><strong>Ejemplo</strong>: pantalla OLED.</p>
+<p>⸻</p>
+<p>A5</p>
+<p><strong>Función especia</strong>l: I2C (SCL)</p>
+<p><strong>Ejemplo</strong>: reloj RTC.</p>
+<p>⸻</p>
+<p><strong>8. DIGITAL PINS </strong>(Pines digitales)</p>
+<p><strong>Pines</strong>:</p>
+<p>0 al 13</p>
+<p>Trabajan con:</p>
+<ul>
+<li>HIGH (5V)</li>
+<li>LOW (0V)</li>
+</ul>
+<p><strong>Sirven para entradas y salidas digitales</strong>.</p>
+<p>⸻</p>
+<p><strong>Pines 0 y 1 (Comunicación Serial)</strong></p>
+<p>0 (RX) → recibir datos<br>1 (TX) → enviar datos</p>
+<p><strong>Ejemplo</strong>: comunicación Bluetooth.</p>
+<p>⸻</p>
+<p><strong>Pines 2 al 7</strong> (Digitales generales)</p>
+<p><strong>Función</strong>: entradas o salidas.</p>
+<p><strong>Ejemplos</strong>:</p>
+<ul>
+<li>LEDs</li>
+<li>botones</li>
+<li>buzzers</li>
+</ul>
+<p>⸻</p>
+<p><strong>Pines 8 al 13 </strong>(Digitales generales)</p>
+<p><strong>Función</strong>: entradas o salidas.</p>
+<p><strong>Ejemplo</strong>:</p>
+<ul>
+<li>motores (con driver)</li>
+<li>relés</li>
+<li>sensores digitales</li>
+</ul>
+<p>⸻</p>
+<p><strong>Pines PWM </strong>(~)</p>
+<p><strong>Pines</strong>:</p>
+<p>3, 5, 6, 9, 10, 11</p>
+<p><strong>Función</strong>: simular señal analógica.</p>
+<p><strong>Ejemplo</strong>:</p>
+<ul>
+<li>controlar velocidad de motor</li>
+<li>brillo de LED</li>
+</ul>
+<p>⸻</p>
+<p><strong>9. Pin 13</strong></p>
+<p>Tiene LED integrado.</p>
+<p><strong>Ejemplo</strong>: pruebas rápidas.</p>
+<p>⸻</p>
+<p><strong>10. Entrada USB</strong></p>
+<p><strong>Función</strong>:</p>
+<ul>
+<li>cargar programas</li>
+<li>alimentar Arduino con 5V</li>
+<li>comunicación con computador</li>
+</ul>
+<p><strong>Ejemplo</strong>:</p>
+<p>programar desde Tinkercad o Arduino IDE.</p>
+<p>__</p>
+<p><strong>11. Entrada de alimentación</strong> (Jack DC)</p>
+<p><strong>Función</strong>: conectar fuente externa.</p>
+<p><strong>Voltaje recomendado</strong>:</p>
+<p>7V a 12V</p>
+<p><strong>Ejemplo</strong>:</p>
+<ul>
+<li>adaptador de corriente</li>
+<li>batería de 9V</li>
+</ul></div><div class="markdown-spacer"></div><div class="markdown-spacer"></div><p><span style="color: #F97316; font-size: 13px"><strong>EJERCICIOS GUIADOS DE CONEXIÓN DE PINES DIGITALES</strong></span></p>
+<ol>
+<li>Crea un sistema para controlar un led rojo mediante pin digital.</li>
+<li>Crea un sistema para controlar un piezo mediante pin digital.</li>
+<li>Crea un sistema para controlar un buzzer mediante pin digital.</li>
+<li>Crea un sistema para controlar un micro servo SG-90 mediante pin digital.</li>
+<li>Crea un sistema que controle 3 leds mediante pines digitales.</li>
+<li>Crea un sistema que controle un piezo y un led mediante pin digital.</li>
+<li>Crea un sistema que controle 2 leds mediante un solo pin digital.</li>
+<li>Crea un sistema que controle 2 leds mediante un pin digital y un piezo mediante otro pin digital.</li>
+<li>Crea un sistema que controle tres leds mediante un pin digital y otros tres leds mediante otro pin digital.</li>
+<li>Crea un sistema que controle 2 leds mediante un pin digital y un microservo SG-90 mediante otro pin digital.</li>
+</ol>
+</div>
+        </div>
+      </details>
+<details class="pv-card">
+        <summary>
+          <span class="pv-card__number" style="background:#534AB7">2</span>
+          <div class="pv-card__header-text">
+            <div class="pv-card__title">Vibe Coding con IA</div>
+            <p class="pv-card__desc">Fundamentos básicos de prompts para generación de código en arduino IDE con IA</p>
+          </div>
+        </summary>
+        <div class="pv-card__body">
+          <div class="pv-markdown"><div class="markdown-styled-block" style="font-size: 13px"><span style="color: #F97316"><strong>INTRODUCCIÓN A TÉCNICA PERCOF</strong></span><div class="markdown-spacer"></div><p><a href="https://artifextsp.github.io/PERTCOF2/" target="_blank" rel="noopener noreferrer">RECURSO DIGITAL</a></p>
+<div class="markdown-spacer"></div><div class="markdown-spacer"></div><div class="markdown-styled-block" style="font-size: 13px"><span style="color: #F97316"><strong>EJERCICIOS VIBE CODING</strong></span></div>
+</div><p><span style="font-size: 13px"><a href="https://drive.google.com/file/d/1rgWOriGZgxUiDpMYpvcvggOPqhGIcw3m/view?usp=drive_link" target="_blank" rel="noopener noreferrer">TALLER PRÁCTICO</a></span></p>
+<div class="markdown-spacer"></div><div class="markdown-spacer"></div><div class="markdown-spacer"></div><div class="markdown-spacer"></div></div>
+        </div>
+      </details>
+      </div>
+
+      <div class="pv-footer">
+        Proyecto SPEED · Análisis · Uniminuto 2026
+      </div>
+    </div>
+  </div>
+  <script src="../site.js"></script>
+</body>
+</html>
