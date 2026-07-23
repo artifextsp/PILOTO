@@ -1,0 +1,240 @@
+.bitacora-page {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+}
+
+.bitacora-public {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.bitacora-public__hero {
+  background: linear-gradient(135deg, #0f766e 0%, #534ab7 100%);
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.28);
+}
+
+.bitacora-public__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #134e4a !important;
+  font-weight: 700;
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+}
+
+.bitacora-public__hero h1 {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.bitacora-public__hero p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.55;
+  max-width: 640px;
+}
+
+.bitacora-public__card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  margin-bottom: 20px;
+}
+
+.bitacora-public__login {
+  display: grid;
+  gap: 14px;
+  max-width: 360px;
+}
+
+.bitacora-public__login label {
+  font-weight: 600;
+  color: #334155;
+}
+
+.bitacora-public__login input {
+  padding: 14px;
+  border-radius: 12px;
+  border: 2px solid #cbd5e1;
+  font-size: 1.5rem;
+  letter-spacing: 0.14em;
+  text-align: center;
+  font-family: ui-monospace, monospace;
+}
+
+.bitacora-public__login button {
+  padding: 14px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #0f766e;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.bitacora-public__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.bitacora-public__code {
+  display: inline-flex;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #312e81;
+  font-weight: 700;
+  font-family: ui-monospace, monospace;
+  letter-spacing: 0.08em;
+}
+
+.bitacora-public__link-btn {
+  background: none;
+  border: none;
+  color: #0f766e;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.bitacora-public__upload {
+  display: grid;
+  gap: 10px;
+}
+
+.bitacora-public__upload label {
+  font-weight: 600;
+  color: #334155;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.bitacora-public__upload input[type="text"],
+.bitacora-public__upload textarea,
+.bitacora-public__upload input[type="file"] {
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #cbd5e1;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.bitacora-public__upload textarea {
+  resize: vertical;
+}
+
+.bitacora-public__upload button {
+  margin-top: 8px;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #534ab7;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.bitacora-public__upload button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.bitacora-public__status {
+  margin: 4px 0 0;
+  color: #334155;
+  font-weight: 600;
+}
+
+.bitacora-public__waiting,
+.bitacora-public__empty,
+.bitacora-public__loading {
+  color: #475569;
+  padding: 12px 0;
+  line-height: 1.5;
+}
+
+.bitacora-public__history h3 {
+  margin: 0 0 12px;
+  color: #fff;
+}
+
+.bitacora-entries {
+  display: grid;
+  gap: 12px;
+}
+
+.bitacora-entry {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
+.bitacora-entry__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.bitacora-entry__head strong {
+  color: #0f172a;
+}
+
+.bitacora-status {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.bitacora-status.is-pending { color: #92400e; background: #fef3c7; }
+.bitacora-status.is-approved { color: #166534; background: #dcfce7; }
+.bitacora-status.is-rejected { color: #991b1b; background: #fee2e2; }
+
+.bitacora-entry__meta {
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.bitacora-entry__desc {
+  margin: 0 0 6px;
+  color: #334155;
+  font-size: 14px;
+}
+
+.bitacora-entry__comment {
+  margin: 8px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  font-size: 13px;
+}
+
+@media (max-width: 640px) {
+  .bitacora-public__hero h1 { font-size: 1.6rem; }
+  .bitacora-public__toolbar { flex-direction: column; align-items: flex-start; }
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bitácora digital · Proyecto SPEED</title>
+  <link rel="stylesheet" href="site.css" />
+  <link rel="stylesheet" href="bitacora.css" />
+</head>
+<body>
+  <div class="pv-wrapper bitacora-page">
+    <div class="bitacora-public">
+      <header class="bitacora-public__hero">
+        <a class="bitacora-public__back" href="index.html">← Volver al temario</a>
+        <h1>Bitácora digital</h1>
+        <p>
+          Sube tus evidencias del piloto (PDF, JPG o PNG, máximo 10 MB) con tu código de
+          4 dígitos. Tu docente las revisará y podrás ver el estado aquí mismo.
+        </p>
+      </header>
+      <div id="bitacora-root">
+        <p class="bitacora-public__loading">Cargando…</p>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="bitacora.js"></script>
+</body>
+</html>
