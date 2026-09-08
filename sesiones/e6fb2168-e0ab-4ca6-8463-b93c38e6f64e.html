@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sesión 7: Diseño estructural - principios de diseño - CHASIS DEL ROBOT · SPEED</title>
+  <link rel="stylesheet" href="../site.css" />
+  <!-- SPEED build: 2026-07-23-bitacora-v2 -->
+  <!-- SPEED published-at: 2026-09-08T02:34:57.797Z -->
+</head>
+<body>
+  <div class="pv-wrapper">
+    <div class="pv-container">
+      <nav class="site-nav site-nav--bar">
+        <a href="../index.html" class="site-nav__back">← Volver al índice del curso</a>
+        <a class="site-pdf-icon-btn site-pdf-icon-btn--nav" href="e6fb2168-e0ab-4ca6-8463-b93c38e6f64e.pdf" download="sesion-7-diseno-estructural-principios-de-diseno-chasis-del.pdf" title="Descargar plan de clase (PDF)" aria-label="Descargar plan de clase en PDF"><svg class="site-pdf-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
+      </nav>
+
+      <div class="pv-hero pv-hero--by-status" data-status="publicado"
+        style="background:#E6F1FB;border-color:#0F4A82;border-left-color:#0F4A82">
+        <div class="pv-hero__phase" style="background:#0F4A82;color:#fff">D</div>
+        <div class="pv-hero__content">
+          <p class="pv-hero__phase-name" style="color:#0F4A82">
+            Fase D — Diseño
+          </p>
+          <h1 class="pv-hero__title" style="color:#0A3D6E">
+            Sesión 7: Diseño estructural - principios de diseño - CHASIS DEL ROBOT
+          </h1>
+          <div class="pv-hero__meta" style="color:#185FA5">
+            <span>Virtual</span><span>·</span><span>6 de agosto de 2026</span>
+          </div>
+          <div class="pv-hero__status">
+            <span class="pv-hero__status-pill"
+              style="color:#185FA5;border-color:#0F4A82;background:rgba(255,255,255,0.88)">
+              <span class="pv-hero__status-dot" style="background:#185FA5"></span>
+              Dictada
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pv-goal" style="border-left-color:#1D9E75">
+        <div>
+          <strong>Lo que vas a lograr hoy</strong>
+          <p>Al finalizar la sesión, el participante será capaz de diseñar la estructura física de un robot móvil, justificando la ubicación de sus componentes electrónicos y mecánicos con base en criterios de estabilidad, distribución de peso, modularidad y mantenimiento.</p>
+        </div>
+      </div>
+
+      <div class="pv-sections">
+        <details class="pv-card">
+        <summary>
+          <span class="pv-card__number" style="background:#1D9E75">1</span>
+          <div class="pv-card__header-text">
+            <div class="pv-card__title">¿Por qué algunos robots funcionan mejor que otros?</div>
+            <p class="pv-card__desc">Despertar curiosidad</p>
+          </div>
+        </summary>
+        <div class="pv-card__body">
+          <div class="pv-markdown"><ul>
+<li>Robot aspiradora (<a href="https://www.youtube.com/shorts/bTT5nnP74Jo" target="_blank" rel="noopener noreferrer">Ver video en YouTube</a>)</li>
+<li>Robot de competencia (<a href="https://www.youtube.com/shorts/2C5hTyUxDQQ" target="_blank" rel="noopener noreferrer">Ver video en YouTube</a>)</li>
+<li>Robot industrial (<a href="https://www.youtube.com/shorts/AYKw5IX5KGk" target="_blank" rel="noopener noreferrer">Ver video en YouTube</a>)</li>
+<li>Robot educativo (<a href="https://www.youtube.com/watch?v=fQQrEdRHCoY" target="_blank" rel="noopener noreferrer">Ver video en YouTube</a>)</li>
+</ul>
+<p>Todos tienen ruedas, motores y sensores. Entonces, ¿por qué unos son más rápidos, estables y precisos que otros?</p>
+<p><a href="https://docs.google.com/presentation/d/15MKTBjg_OjG1pvgiu3efyWvAXTbF0ERA/edit?usp=sharing&ouid=109640554771072263790&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">Ver recurso</a></p>
+</div>
+        </div>
+      </details>
+<details class="pv-card">
+        <summary>
+          <span class="pv-card__number" style="background:#1D9E75">2</span>
+          <div class="pv-card__header-text">
+            <div class="pv-card__title">Anatomía de un robot móvil</div>
+            <p class="pv-card__desc">Introducción a los componentes de los robots.</p>
+          </div>
+        </summary>
+        <div class="pv-card__body">
+          <div class="pv-markdown"><h3>Anatomía de un robot móvil</h3>
+<ul>
+<li><p><strong>Chasis:</strong> Es la estructura que sostiene y organiza todos los componentes del robot. Debe ser resistente, estable y ligero.</p>
+</li>
+<li><p><strong>Motores:</strong> Transforman la energía eléctrica en movimiento. Permiten que el robot avance, retroceda y gire.</p>
+</li>
+<li><p><strong>Driver de motores:</strong> Actúa como intermediario entre el Arduino y los motores. Permite controlar su dirección y velocidad, suministrando la corriente necesaria.</p>
+</li>
+<li><p><strong>Arduino:</strong> Es el controlador principal del robot. Ejecuta el programa, procesa la información de los sensores y envía órdenes a los motores.</p>
+</li>
+<li><p><strong>Batería:</strong> Proporciona la energía eléctrica necesaria para alimentar el Arduino, los motores, sensores y demás componentes.</p>
+</li>
+<li><p><strong>Sensor ultrasónico:</strong> Permite detectar obstáculos midiendo la distancia mediante ondas ultrasónicas. El HC-SR04 es un ejemplo común.</p>
+</li>
+<li><p><strong>Ruedas:</strong> Transmiten el movimiento de los motores al suelo y permiten el desplazamiento del robot. Su tamaño y material influyen en la velocidad, estabilidad y tracción.</p>
+</li>
+</ul>
+</div>
+        </div>
+      </details>
+<details class="pv-card">
+        <summary>
+          <span class="pv-card__number" style="background:#1D9E75">3</span>
+          <div class="pv-card__header-text">
+            <div class="pv-card__title">Principios de diseño estructural</div>
+            <p class="pv-card__desc">Ideas generales sobre el diseño</p>
+          </div>
+        </summary>
+        <div class="pv-card__body">
+          <div class="pv-markdown"><h3>Principios de diseño de un robot</h3>
+<ul>
+<li><p><strong>Centro de gravedad:</strong> Es el punto donde se concentra el peso del robot. Debe mantenerse bajo y bien ubicado para evitar que el robot se vuelque durante el movimiento.</p>
+</li>
+<li><p><strong>Distribución del peso:</strong> El peso debe repartirse de manera equilibrada para mejorar la estabilidad, la tracción y el comportamiento de los motores.</p>
+</li>
+<li><p><strong>Modularidad:</strong> El robot debe diseñarse de forma que sus componentes puedan agregarse, retirarse o reemplazarse fácilmente sin tener que reconstruir todo el sistema.</p>
+</li>
+<li><p><strong>Accesibilidad:</strong> Los componentes importantes, como batería, Arduino, driver y conexiones, deben ser fáciles de alcanzar para realizar mantenimiento, pruebas o reparaciones.</p>
+</li>
+<li><p><strong>Protección del sistema:</strong> Los componentes electrónicos y mecánicos deben estar protegidos contra golpes, polvo, cables sueltos y otros elementos que puedan afectar el funcionamiento del robot.</p>
+</li>
+</ul>
+</div>
+        </div>
+      </details>
+<details class="pv-card">
+        <summary>
+          <span class="pv-card__number" style="background:#1D9E75">4</span>
+          <div class="pv-card__header-text">
+            <div class="pv-card__title">Diseño del chasis</div>
+            <p class="pv-card__desc">Trabajo sobre el chasis</p>
+          </div>
+        </summary>
+        <div class="pv-card__body">
+          <div class="pv-markdown"><h2>Diseño del chasis</h2>
+<p>El <strong>chasis</strong> es la estructura principal del robot. Su diseño influye directamente en la <strong>estabilidad, velocidad, maniobrabilidad y distribución del peso</strong>.</p>
+<ul>
+<li><p><strong>Forma y dimensiones:</strong> El tamaño y la forma deben adaptarse a la función del robot. Un chasis compacto facilita los giros y el desplazamiento en espacios reducidos.</p>
+</li>
+<li><p><strong>Material:</strong> Debe ser suficientemente resistente, pero también ligero. Se pueden utilizar materiales como acrílico, aluminio, MDF, impresión 3D o piezas estructurales.</p>
+</li>
+<li><p><strong>Distribución de componentes:</strong> Los motores, batería, Arduino, driver y sensores deben ubicarse estratégicamente para mantener el equilibrio y facilitar el acceso.</p>
+</li>
+<li><p><strong>Centro de gravedad:</strong> Los componentes pesados, especialmente la batería, deben colocarse preferiblemente en una posición <strong>baja y centrada</strong> para reducir el riesgo de vuelco.</p>
+</li>
+<li><p><strong>Distancia entre ruedas:</strong> La separación entre las ruedas afecta la estabilidad y la capacidad de giro. Una mayor distancia puede aumentar la estabilidad, mientras que una menor puede favorecer la maniobrabilidad.</p>
+</li>
+<li><p><strong>Rigidez estructural:</strong> El chasis no debe flexionarse excesivamente durante el movimiento, ya que las vibraciones pueden afectar sensores, conexiones y precisión del robot.</p>
+</li>
+<li><p><strong>Modularidad:</strong> Es recomendable diseñar puntos de montaje para poder agregar o cambiar sensores, motores y otros componentes sin modificar completamente la estructura.</p>
+</li>
+<li><p><strong>Protección:</strong> El chasis debe proteger los componentes electrónicos de golpes y permitir que los cables queden organizados y seguros.</p>
+</li>
+</ul>
+<h3>Principio clave</h3>
+<blockquote>
+<p><strong>Un buen chasis no es el que simplemente sostiene los componentes; es el que permite que todo el robot funcione de manera estable, eficiente y fácil de mantener.</strong></p>
+</blockquote>
+<p><strong>Idea para los estudiantes:</strong> antes de construir, deben realizar un <strong>boceto del chasis</strong> indicando dónde estará cada componente y justificar por qué eligieron esa ubicación.</p>
+</div>
+        </div>
+      </details>
+      </div>
+
+      <div class="pv-footer">
+        Proyecto SPEED · Diseño · Uniminuto 2026
+      </div>
+    </div>
+  </div>
+  <script src="../site.js"></script>
+</body>
+</html>
